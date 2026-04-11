@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="650" viewBox="0 0 900 650">
+  <defs>
+    <linearGradient id="bg2" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0b0b0b"/>
+      <stop offset="1" stop-color="#2c2c2c"/>
+    </linearGradient>
+    <linearGradient id="gold2" x1="0" x2="1">
+      <stop offset="0" stop-color="#9a7d2d"/>
+      <stop offset="0.5" stop-color="#f4d77a"/>
+      <stop offset="1" stop-color="#9a7d2d"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="900" height="650" rx="26" fill="url(#bg2)"/>
+  <rect x="44" y="58" width="812" height="534" rx="18" fill="#121212" opacity="0.55"/>
+  <rect x="480" y="110" width="330" height="420" rx="18" fill="#1a1a1a" opacity="0.8"/>
+  <rect x="510" y="140" width="270" height="160" rx="12" fill="#efe1b8" stroke="url(#gold2)" stroke-width="5"/>
+  <rect x="540" y="164" width="110" height="30" rx="8" fill="#e7d6a2"/>
+  <text x="554" y="186" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="900" fill="#2b2b2b">QFS</text>
+  <rect x="510" y="316" width="270" height="184" rx="12" fill="#163a2a" stroke="url(#gold2)" stroke-width="5"/>
+  <path d="M524 460c54-40 104-52 152-36 32 10 62 10 90-4" fill="none" stroke="#f4d77a" stroke-width="6" opacity="0.9"/>
+  <rect x="82" y="132" width="348" height="10" rx="5" fill="#ffffff" opacity="0.08"/>
+  <rect x="82" y="158" width="308" height="10" rx="5" fill="#ffffff" opacity="0.08"/>
+  <text x="82" y="120" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="900" fill="#f4d77a" opacity="0.9">PRECISION ARTISTRY • HOLOGRAPHIC GOLD</text>
+  <text x="82" y="240" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="900" fill="#ffffff">A Masterpiece of the New</text>
+  <text x="82" y="300" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="900" fill="#ffffff">Era.</text>
+  <rect x="82" y="322" width="76" height="10" rx="5" fill="url(#gold2)" opacity="0.85"/>
+  <rect x="82" y="362" width="390" height="10" rx="5" fill="#ffffff" opacity="0.08"/>
+  <rect x="82" y="388" width="404" height="10" rx="5" fill="#ffffff" opacity="0.08"/>
+  <rect x="82" y="414" width="360" height="10" rx="5" fill="#ffffff" opacity="0.08"/>
+  <rect x="82" y="440" width="392" height="10" rx="5" fill="#ffffff" opacity="0.08"/>
+  <rect x="82" y="466" width="330" height="10" rx="5" fill="#ffffff" opacity="0.08"/>
+  <rect x="82" y="520" width="260" height="56" rx="10" fill="url(#gold2)"/>
+  <text x="212" y="554" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="900" fill="#111111">CHECK AVAILABILITY</text>
+</svg>
+

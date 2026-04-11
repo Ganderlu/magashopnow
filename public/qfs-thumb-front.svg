@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="112" viewBox="0 0 180 112">
+  <rect x="4" y="4" width="172" height="104" rx="10" fill="#efe1b8" stroke="#b9a66f" stroke-width="4"/>
+  <rect x="18" y="22" width="144" height="30" rx="6" fill="#e7d6a2"/>
+  <text x="34" y="44" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="900" fill="#2b2b2b">QFS</text>
+  <text x="78" y="44" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="900" fill="#9a7d2d">GOLD</text>
+  <rect x="18" y="60" width="144" height="34" rx="6" fill="#e9dab0"/>
+</svg>
+

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="110" viewBox="0 0 180 110">
+  <defs>
+    <linearGradient id="w" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#0b1f45"/>
+      <stop offset="0.5" stop-color="#c71f1f"/>
+      <stop offset="1" stop-color="#0b1f45"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="none">
+    <path d="M26 44c10-10 22-16 36-18-10 10-14 20-12 30-10-1-18-5-24-12z" fill="#0b1f45"/>
+    <path d="M154 44c-10-10-22-16-36-18 10 10 14 20 12 30 10-1 18-5 24-12z" fill="#0b1f45"/>
+    <path d="M58 26c10-8 21-12 32-12s22 4 32 12c-7 7-14 12-21 14-4 1-7 1-11 0-4 1-7 1-11 0-7-2-14-7-21-14z" fill="url(#w)"/>
+    <path d="M81 40h18c2 0 4 2 4 4v10c0 8-7 16-13 20-6-4-13-12-13-20V44c0-2 2-4 4-4z" fill="#101010"/>
+    <path d="M84 45h12v3H84z" fill="#ffffff"/>
+    <path d="M84 51h12v3H84z" fill="#ffffff"/>
+    <path d="M84 57h12v3H84z" fill="#ffffff"/>
+    <circle cx="90" cy="62" r="4" fill="#c71f1f"/>
+    <path d="M38 58c12 12 30 19 52 21-2 5-6 9-10 11-17-2-33-7-46-16-4-3-7-7-9-11z" fill="#0b1f45"/>
+    <path d="M142 58c-12 12-30 19-52 21 2 5 6 9 10 11 17-2 33-7 46-16 4-3 7-7 9-11z" fill="#0b1f45"/>
+    <text x="90" y="104" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#2b2b2b" font-weight="700">
+      OUR MAGA SHOP
+    </text>
+  </g>
+</svg>
+
