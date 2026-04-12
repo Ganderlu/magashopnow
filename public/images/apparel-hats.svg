@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="820" viewBox="0 0 700 820">
+  <rect width="700" height="820" fill="#f6f6f6"/>
+  <g transform="translate(120 170)">
+    <g transform="translate(160 0)">
+      <path d="M80 60c70-55 210-55 280 0 40 32 55 72 55 110H25c0-38 15-78 55-110z" fill="#111111"/>
+      <path d="M25 170h390c0 60-60 90-195 90S25 230 25 170z" fill="#0f0f0f"/>
+      <path d="M220 120c70 0 150 10 215 35" fill="none" stroke="#2b2b2b" stroke-width="22" stroke-linecap="round"/>
+      <text x="220" y="138" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#d9d9d9" opacity="0.85">MAKE AMERICA</text>
+      <text x="220" y="164" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#d9d9d9" opacity="0.85">GREAT AGAIN</text>
+    </g>
+    <g transform="translate(0 210)">
+      <path d="M80 60c70-55 210-55 280 0 40 32 55 72 55 110H25c0-38 15-78 55-110z" fill="#111111"/>
+      <path d="M25 170h390c0 60-60 90-195 90S25 230 25 170z" fill="#0f0f0f"/>
+      <path d="M220 120c70 0 150 10 215 35" fill="none" stroke="#2b2b2b" stroke-width="22" stroke-linecap="round"/>
+      <text x="220" y="138" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#d9d9d9" opacity="0.85">MAKE AMERICA</text>
+      <text x="220" y="164" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#d9d9d9" opacity="0.85">GREAT AGAIN</text>
+    </g>
+  </g>
+</svg>
+

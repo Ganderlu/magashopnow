@@ -123,7 +123,7 @@ export function GoldenAgeStoryBlocks() {
             title="The Golden Age Is Here."
             description="The storm has passed. We are witnessing the return to a value-based system, anchored in integrity and sovereignty. The QFS Rainbow Bill is designed to mark this historic transition—a physical representation of the wealth and freedom returning to the people.\n\nFinished in 99.99% Gold Foil with high-security holographic detailing, this asset represents the promise of the 47th President. It is not just a note; it is your personal stake in the future. Secure your legacy before the public release closes."
             imageOnLeft
-            imageSrc="/golden-age-hero-1.svg"
+            imageSrc="/images/q21.webp"
             imageAlt="Golden Age hero"
           />
 
@@ -132,7 +132,7 @@ export function GoldenAgeStoryBlocks() {
             title="A Masterpiece of the New Era."
             description="The QFS Rainbow Bill represents the perfect fusion of tradition and future technology. Crafted with distinct rainbow holographic foils overlaid on pure 99.9% gold leaf, this note shimmers with the full spectrum of light—symbolizing transparency and the bright future of our great nation.\n\nEvery detail, from the portrait of the 47th President to the intricate security-style engravings, is designed to honor the restoration of the Republic. This is not merely a display piece; it is a declaration of where you stand in history. Authentic, resilient, and undeniably patriotic."
             imageOnLeft={false}
-            imageSrc="/golden-age-hero-2.svg"
+            imageSrc="/images/q22.webp"
             imageAlt="Masterpiece hero"
           />
         </div>
@@ -140,4 +140,3 @@ export function GoldenAgeStoryBlocks() {
     </section>
   );
 }
-

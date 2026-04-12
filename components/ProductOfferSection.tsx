@@ -120,9 +120,13 @@ function LiveFeedCard() {
 
 export function ProductOfferSection() {
   const [selectedId, setSelectedId] = React.useState<string>("90x");
-  const [endsAtMs, setEndsAtMs] = React.useState<number>(() => Date.now() + 4 * 60_60_000);
+  const [endsAtMs, setEndsAtMs] = React.useState<number>(
+    () => Date.now() + 4 * 60_60_000,
+  );
   const [nowMs, setNowMs] = React.useState<number>(() => Date.now());
-  const [activeThumb, setActiveThumb] = React.useState<"front" | "back">("front");
+  const [activeThumb, setActiveThumb] = React.useState<"front" | "back">(
+    "front",
+  );
 
   React.useEffect(() => {
     const unsub = listenPromoData((data) => setEndsAtMs(data.endsAtMs));
@@ -145,7 +149,7 @@ export function ProductOfferSection() {
               <div className="grid gap-4">
                 <div className="overflow-hidden rounded border border-zinc-200 bg-white shadow-[0_8px_26px_rgba(0,0,0,0.08)]">
                   <Image
-                    src={activeThumb === "front" ? "/qfs-bill-front.svg" : "/qfs-bill-back.svg"}
+                    src="/images/q1.png"
                     alt="QFS Gold Bill"
                     width={900}
                     height={450}
@@ -155,7 +159,7 @@ export function ProductOfferSection() {
                 </div>
                 <div className="overflow-hidden rounded border border-zinc-200 bg-white shadow-[0_8px_26px_rgba(0,0,0,0.08)]">
                   <Image
-                    src={activeThumb === "front" ? "/qfs-bill-back.svg" : "/qfs-bill-front.svg"}
+                    src="/images/q1.png"
                     alt="QFS Gold Bill back"
                     width={900}
                     height={450}
@@ -187,7 +191,12 @@ export function ProductOfferSection() {
               ].join(" ")}
               aria-label="Front image"
             >
-              <Image src="/qfs-thumb-front.svg" alt="Front thumb" width={90} height={56} />
+              <Image
+                src="/images/q1.png"
+                alt="Front thumb"
+                width={90}
+                height={56}
+              />
             </button>
             <button
               type="button"
@@ -198,14 +207,24 @@ export function ProductOfferSection() {
               ].join(" ")}
               aria-label="Back image"
             >
-              <Image src="/qfs-thumb-back.svg" alt="Back thumb" width={90} height={56} />
+              <Image
+                src="/images/q1.png"
+                alt="Back thumb"
+                width={90}
+                height={56}
+              />
             </button>
             <button
               type="button"
               className="overflow-hidden rounded border border-zinc-200 bg-white shadow-[0_10px_22px_rgba(0,0,0,0.12)]"
               aria-label="Extra image"
             >
-              <Image src="/qfs-thumb-mini.svg" alt="Mini thumb" width={90} height={56} />
+              <Image
+                src="/images/q1.png"
+                alt="Mini thumb"
+                width={90}
+                height={56}
+              />
             </button>
           </div>
         </div>
@@ -270,7 +289,7 @@ export function ProductOfferSection() {
                   >
                     <div className="grid h-7 w-10 place-items-center overflow-hidden rounded border border-zinc-200 bg-white">
                       <Image
-                        src="/qfs-icon.svg"
+                        src="/images/q1.png"
                         alt=""
                         width={34}
                         height={18}
@@ -278,9 +297,13 @@ export function ProductOfferSection() {
                       />
                     </div>
                     <div className="flex-1">
-                      <div className="text-[11px] font-extrabold">{opt.label}</div>
+                      <div className="text-[11px] font-extrabold">
+                        {opt.label}
+                      </div>
                     </div>
-                    <div className="text-[11px] font-extrabold">{opt.price}</div>
+                    <div className="text-[11px] font-extrabold">
+                      {opt.price}
+                    </div>
 
                     {opt.badge ? (
                       <div className="absolute -top-2 right-3 rounded bg-black px-2 py-0.5 text-[9px] font-extrabold text-white">

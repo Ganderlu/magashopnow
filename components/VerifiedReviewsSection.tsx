@@ -66,7 +66,7 @@ export function VerifiedReviewsSection() {
               <div className="absolute -inset-4 rounded-[28px] bg-white shadow-[0_30px_90px_rgba(0,0,0,0.12)]" />
               <div className="relative overflow-hidden rounded-[22px] border border-white bg-white">
                 <Image
-                  src="/reviews-hero.svg"
+                  src="/images/q23.webp"
                   alt="QFS Gold Bill"
                   width={560}
                   height={560}
@@ -145,4 +145,3 @@ export function VerifiedReviewsSection() {
     </section>
   );
 }
-

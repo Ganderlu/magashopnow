@@ -271,7 +271,7 @@ export function CheckoutScreen({ bundleId }: { bundleId?: string }) {
                   <div className="mt-4 flex items-center gap-3 rounded-md border border-zinc-200 bg-white p-3">
                     <div className="grid h-10 w-14 place-items-center overflow-hidden rounded border border-zinc-200 bg-white">
                       <Image
-                        src="/qfs-icon.svg"
+                      src="/images/q1.png"
                         alt=""
                         width={52}
                         height={28}
@@ -324,7 +324,7 @@ export function CheckoutScreen({ bundleId }: { bundleId?: string }) {
             <div className="bg-[#fafafa] px-6 py-6">
               <div className="flex items-start gap-3">
                 <div className="grid h-12 w-14 place-items-center overflow-hidden rounded-md border border-zinc-200 bg-white">
-                  <Image src="/qfs-icon.svg" alt="" width={52} height={28} />
+                  <Image src="/images/q1.png" alt="" width={52} height={28} />
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="text-[11px] font-extrabold text-zinc-900">

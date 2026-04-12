@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="820" viewBox="0 0 700 820">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#9a7d2d"/>
+      <stop offset="0.5" stop-color="#f4d77a"/>
+      <stop offset="1" stop-color="#9a7d2d"/>
+    </linearGradient>
+  </defs>
+  <rect width="700" height="820" fill="#f6f6f6"/>
+  <g transform="translate(170 210)">
+    <circle cx="180" cy="240" r="180" fill="url(#g)" stroke="#7e621e" stroke-width="14"/>
+    <circle cx="180" cy="240" r="136" fill="none" stroke="#2b2b2b" stroke-width="5" opacity="0.2"/>
+    <path d="M100 260c30-70 70-110 80-110s50 40 80 110" fill="none" stroke="#2b2b2b" stroke-width="12" opacity="0.35" stroke-linecap="round"/>
+    <text x="180" y="250" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="900" fill="#2b2b2b" opacity="0.75">LIBERTY</text>
+    <rect x="18" y="460" width="324" height="120" rx="20" fill="#ffffff" opacity="0.65"/>
+  </g>
+</svg>
+
