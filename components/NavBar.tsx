@@ -5,6 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BagIcon, SearchIcon, UserIcon } from "@/components/Icons";
 import * as React from "react";
+import { useCart } from "@/components/CartProvider";
+import { SearchModal } from "@/components/SearchModal";
+import { AuthModal } from "@/components/AuthModal";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -18,6 +21,9 @@ const navItems = [
 export function NavBar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [searchOpen, setSearchOpen] = React.useState(false);
+  const [authOpen, setAuthOpen] = React.useState(false);
+  const { count } = useCart();
 
   React.useEffect(() => {
     setMobileOpen(false);
@@ -87,6 +93,7 @@ export function NavBar() {
             type="button"
             className="rounded-full p-2 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
             aria-label="Search"
+            onClick={() => setSearchOpen(true)}
           >
             <SearchIcon className="h-5 w-5" />
           </button>
@@ -94,16 +101,24 @@ export function NavBar() {
             type="button"
             className="rounded-full p-2 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
             aria-label="Account"
+            onClick={() => setAuthOpen(true)}
           >
             <UserIcon className="h-5 w-5" />
           </button>
-          <button
-            type="button"
+          <Link
+            href="/cart"
             className="rounded-full p-2 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
             aria-label="Cart"
           >
-            <BagIcon className="h-5 w-5" />
-          </button>
+            <span className="relative inline-flex">
+              <BagIcon className="h-5 w-5" />
+              {count > 0 ? (
+                <span className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-[#6c0d0d] px-1 text-[11px] font-extrabold text-white">
+                  {count}
+                </span>
+              ) : null}
+            </span>
+          </Link>
         </div>
       </div>
 
@@ -155,7 +170,9 @@ export function NavBar() {
                       onClick={() => setMobileOpen(false)}
                     >
                       <span>{item.label}</span>
-                      <span className={isActive ? "text-white/90" : "text-zinc-400"}>
+                      <span
+                        className={isActive ? "text-white/90" : "text-zinc-400"}
+                      >
                         →
                       </span>
                     </Link>
@@ -168,6 +185,10 @@ export function NavBar() {
                   type="button"
                   className="rounded-full border border-zinc-200 p-3 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
                   aria-label="Search"
+                  onClick={() => {
+                    setMobileOpen(false);
+                    setSearchOpen(true);
+                  }}
                 >
                   <SearchIcon className="h-5 w-5" />
                 </button>
@@ -175,21 +196,36 @@ export function NavBar() {
                   type="button"
                   className="rounded-full border border-zinc-200 p-3 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
                   aria-label="Account"
+                  onClick={() => {
+                    setMobileOpen(false);
+                    setAuthOpen(true);
+                  }}
                 >
                   <UserIcon className="h-5 w-5" />
                 </button>
-                <button
-                  type="button"
+                <Link
+                  href="/cart"
                   className="rounded-full border border-zinc-200 p-3 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
                   aria-label="Cart"
+                  onClick={() => setMobileOpen(false)}
                 >
-                  <BagIcon className="h-5 w-5" />
-                </button>
+                  <span className="relative inline-flex">
+                    <BagIcon className="h-5 w-5" />
+                    {count > 0 ? (
+                      <span className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-[#6c0d0d] px-1 text-[11px] font-extrabold text-white">
+                        {count}
+                      </span>
+                    ) : null}
+                  </span>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       ) : null}
+
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
     </header>
   );
 }

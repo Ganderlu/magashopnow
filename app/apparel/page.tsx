@@ -1,5 +1,9 @@
+"use client";
+
 import { NavBar } from "@/components/NavBar";
 import Image from "next/image";
+import { useCart } from "@/components/CartProvider";
+import * as React from "react";
 
 type ApparelItem = {
   id: string;
@@ -19,7 +23,7 @@ const items: ApparelItem[] = [
     price: "$9.99",
     compareAt: "$19.99",
     badge: "SAVE 50%",
-    imageSrc: "/images/apparel-socks.svg",
+    imageSrc: "/images/socks.webp",
     imageAlt: "Trump 2024 Socks",
   },
   {
@@ -27,7 +31,7 @@ const items: ApparelItem[] = [
     title: "Jesus Is My Savior Trump Is My President Shirt",
     price: "$39.99",
     soldOut: true,
-    imageSrc: "/images/apparel-shirt.svg",
+    imageSrc: "/images/polo.webp",
     imageAlt: "Jesus Is My Savior Trump Is My President Shirt",
   },
   {
@@ -36,7 +40,7 @@ const items: ApparelItem[] = [
     price: "$55.00",
     compareAt: "$149.00",
     badge: "SAVE 63%",
-    imageSrc: "/images/apparel-hats.svg",
+    imageSrc: "/images/cap.webp",
     imageAlt: "Make America Great Again Dark MAGA Edition",
   },
 ];
@@ -54,6 +58,9 @@ function Dropdown({ label }: { label: string }) {
 }
 
 function Card({ item }: { item: ApparelItem }) {
+  const { add } = useCart();
+  const [added, setAdded] = React.useState(false);
+
   return (
     <div className="relative overflow-hidden rounded-xl bg-white shadow-[0_10px_25px_rgba(0,0,0,0.12)]">
       <div className="relative bg-[#f6f6f6] p-4">
@@ -63,6 +70,7 @@ function Card({ item }: { item: ApparelItem }) {
             alt={item.imageAlt}
             fill
             className="object-contain"
+            sizes="(max-width: 768px) 90vw, 260px"
             priority={false}
           />
         </div>
@@ -103,8 +111,19 @@ function Card({ item }: { item: ApparelItem }) {
               ? "bg-[#b79090] text-white"
               : "bg-[#6c0d0d] text-white",
           ].join(" ")}
+          onClick={() => {
+            if (item.soldOut) return;
+            add({
+              id: item.id,
+              title: item.title,
+              price: item.price,
+              imageSrc: item.imageSrc,
+            });
+            setAdded(true);
+            window.setTimeout(() => setAdded(false), 1200);
+          }}
         >
-          {item.soldOut ? "Sold out" : "Add to cart"}
+          {item.soldOut ? "Sold out" : added ? "Added" : "Add to cart"}
         </button>
       </div>
     </div>
@@ -146,4 +165,3 @@ export default function ApparelPage() {
     </div>
   );
 }
-

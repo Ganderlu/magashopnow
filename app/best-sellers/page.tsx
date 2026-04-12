@@ -16,14 +16,14 @@ const cards: CollectionCard[] = [
     id: "apparel",
     title: "Apparel",
     href: "/apparel",
-    imageSrc: "/images/apparel-socks.svg",
+    imageSrc: "/images/socks.webp",
     imageAlt: "Apparel",
   },
   {
     id: "home",
     title: "Home page",
     href: "/",
-    imageSrc: "/images/medallion-bitcoin-bar.svg",
+    imageSrc: "/images/q32.webp",
     imageAlt: "Home page",
   },
   {
@@ -109,4 +109,3 @@ export default function BestSellersPage() {
     </div>
   );
 }
-

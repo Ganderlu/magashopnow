@@ -1,5 +1,9 @@
+"use client";
+
 import { NavBar } from "@/components/NavBar";
 import Image from "next/image";
+import * as React from "react";
+import { useCart } from "@/components/CartProvider";
 
 type MedallionItem = {
   id: string;
@@ -26,14 +30,14 @@ const items: MedallionItem[] = [
     price: "$1,399.99",
     badge: "SAVE 90%",
     compareAt: "$14,999.00",
-    imageSrc: "/images/medallion-coin.svg",
+    imageSrc: "/images/q31.webp",
     imageAlt: "Golden QFS Coin",
   },
   {
     id: "nesara-pack",
     title: "Nesara Gesara QFS Gold",
     price: "$1,399.99",
-    imageSrc: "/images/medallion-nesara-pack.svg",
+    imageSrc: "/images/q32.webp",
     imageAlt: "Nesara Gesara pack",
   },
   {
@@ -49,7 +53,7 @@ const items: MedallionItem[] = [
     id: "bitcoin-bar",
     title: "Trump 1000 Bitcoin Gold Bar",
     price: "$19,999.00",
-    imageSrc: "/images/medallion-bitcoin-bar.svg",
+    imageSrc: "/images/q35.webp",
     imageAlt: "Bitcoin Gold Bar",
   },
   {
@@ -65,7 +69,7 @@ const items: MedallionItem[] = [
     id: "trump-silver",
     title: "President Trump First 2026 Edition Silver Medallion",
     price: "$49.00",
-    imageSrc: "/images/medallion-trump-silver.svg",
+    imageSrc: "/images/q36.webp",
     imageAlt: "Trump Silver Medallion",
   },
   {
@@ -82,7 +86,7 @@ const items: MedallionItem[] = [
     title: "Liberty Gold Coin",
     price: "$179.99",
     soldOut: true,
-    imageSrc: "/images/medallion-liberty-coin.svg",
+    imageSrc: "/images/q38.webp",
     imageAlt: "Liberty Gold Coin",
   },
 ];
@@ -100,6 +104,9 @@ function Dropdown({ label }: { label: string }) {
 }
 
 function Card({ item }: { item: MedallionItem }) {
+  const { add } = useCart();
+  const [added, setAdded] = React.useState(false);
+
   return (
     <div className="relative overflow-hidden rounded-xl bg-white shadow-[0_10px_25px_rgba(0,0,0,0.12)]">
       <div className="relative bg-[#f6f6f6] p-4">
@@ -109,6 +116,7 @@ function Card({ item }: { item: MedallionItem }) {
             alt={item.imageAlt}
             fill
             className="object-contain"
+            sizes="(max-width: 768px) 90vw, 240px"
             priority={false}
           />
         </div>
@@ -149,8 +157,19 @@ function Card({ item }: { item: MedallionItem }) {
               ? "bg-[#b79090] text-white"
               : "bg-[#6c0d0d] text-white",
           ].join(" ")}
+          onClick={() => {
+            if (item.soldOut) return;
+            add({
+              id: item.id,
+              title: item.title,
+              price: item.price,
+              imageSrc: item.imageSrc,
+            });
+            setAdded(true);
+            window.setTimeout(() => setAdded(false), 1200);
+          }}
         >
-          {item.soldOut ? "Sold out" : "Add to cart"}
+          {item.soldOut ? "Sold out" : added ? "Added" : "Add to cart"}
         </button>
       </div>
     </div>
@@ -192,4 +211,3 @@ export default function MedallionsPage() {
     </div>
   );
 }
-
