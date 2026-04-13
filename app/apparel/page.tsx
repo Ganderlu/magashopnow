@@ -23,7 +23,7 @@ const items: ApparelItem[] = [
     price: "$9.99",
     compareAt: "$19.99",
     badge: "SAVE 50%",
-    imageSrc: "/images/socks.webp",
+    imageSrc: "/images/soc.webp",
     imageAlt: "Trump 2024 Socks",
   },
   {

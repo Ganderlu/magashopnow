@@ -138,7 +138,7 @@ export default function CartPage() {
               </div>
 
               <Link
-                href="/checkout"
+                href="/checkout?from=cart"
                 className="mt-5 grid h-11 place-items-center rounded-md bg-blue-600 text-[12px] font-extrabold text-white"
               >
                 Checkout

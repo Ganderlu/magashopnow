@@ -21,7 +21,7 @@ const items: MedallionItem[] = [
     id: "qfs-bill",
     title: "QFS GOLD BILL",
     price: "$1,399.00",
-    imageSrc: "/images/q1.png",
+    imageSrc: "/images/q1.webp",
     imageAlt: "QFS Gold Bill",
   },
   {
@@ -37,7 +37,7 @@ const items: MedallionItem[] = [
     id: "nesara-pack",
     title: "Nesara Gesara QFS Gold",
     price: "$1,399.99",
-    imageSrc: "/images/q32.webp",
+    imageSrc: "/images/q41.png",
     imageAlt: "Nesara Gesara pack",
   },
   {
@@ -46,14 +46,14 @@ const items: MedallionItem[] = [
     price: "$299.00",
     badge: "SAVE 90%",
     compareAt: "$2,999.00",
-    imageSrc: "/images/q1.png",
+    imageSrc: "/images/q1.webp",
     imageAlt: "X25 QFS Gold Bills",
   },
   {
     id: "bitcoin-bar",
     title: "Trump 1000 Bitcoin Gold Bar",
     price: "$19,999.00",
-    imageSrc: "/images/q35.webp",
+    imageSrc: "/images/q43.png",
     imageAlt: "Bitcoin Gold Bar",
   },
   {
@@ -62,7 +62,7 @@ const items: MedallionItem[] = [
     price: "$999.00",
     badge: "SAVE 90%",
     compareAt: "$9,999.00",
-    imageSrc: "/images/q1.png",
+    imageSrc: "/images/q1.webp",
     imageAlt: "X120 QFS Gold Bills",
   },
   {
@@ -78,7 +78,7 @@ const items: MedallionItem[] = [
     price: "$1,399.00",
     badge: "SAVE 90%",
     compareAt: "$13,999.00",
-    imageSrc: "/images/q1.png",
+    imageSrc: "/images/q1.webp",
     imageAlt: "X180 QFS Gold Bills",
   },
   {

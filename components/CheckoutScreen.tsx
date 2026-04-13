@@ -5,6 +5,7 @@ import Link from "next/link";
 import * as React from "react";
 import { CryptoWalletModal } from "@/components/CryptoWalletModal";
 import { StripeCheckoutModal } from "@/components/StripeCheckoutModal";
+import { CartState, readCart } from "@/lib/cart";
 import {
   formatUsd,
   getQfsBundleById,
@@ -82,15 +83,56 @@ function Divider() {
   return <div className="my-5 h-px w-full bg-zinc-200" />;
 }
 
-export function CheckoutScreen({ bundleId }: { bundleId?: string }) {
+export function CheckoutScreen({
+  bundleId,
+  from,
+}: {
+  bundleId?: string;
+  from?: string;
+}) {
+  const fromCart = from === "cart";
   const bundle =
     getQfsBundleById(bundleId) ??
     qfsBundles.find((b) => b.badge === "Most Popular")!;
 
-  const price = parseUsd(bundle.price);
-  const amountCents = Math.max(0, Math.round(price * 100));
+  const [cartState, setCartState] = React.useState<CartState | null>(null);
+
+  React.useEffect(() => {
+    if (!fromCart) return;
+    setCartState(readCart());
+    const onUpdate = () => setCartState(readCart());
+    window.addEventListener("storage", onUpdate);
+    window.addEventListener("oms_cart_updated", onUpdate);
+    return () => {
+      window.removeEventListener("storage", onUpdate);
+      window.removeEventListener("oms_cart_updated", onUpdate);
+    };
+  }, [fromCart]);
+
+  const cartItems = React.useMemo(() => cartState?.items ?? [], [cartState]);
+  const cartSubtotal = React.useMemo(() => {
+    return cartItems.reduce(
+      (sum, item) => sum + parseUsd(item.price) * item.quantity,
+      0,
+    );
+  }, [cartItems]);
+
+  const primaryCartItem = React.useMemo(() => {
+    if (cartItems.length === 0) return null;
+    return (
+      cartItems.find((i) => i.title.toLowerCase().includes("qfs")) ?? cartItems[0]
+    );
+  }, [cartItems]);
+
+  const payAmountUsd = fromCart ? cartSubtotal : parseUsd(bundle.price);
+  const amountCents = Math.max(0, Math.round(payAmountUsd * 100));
+  const payLabel = fromCart
+    ? primaryCartItem?.title ?? "Cart"
+    : bundle.label;
+  const payId = fromCart ? primaryCartItem?.id ?? "cart" : bundle.id;
+
   const futureValue = 1_097_460;
-  const savings = Math.max(0, futureValue - price);
+  const savings = Math.max(0, futureValue - parseUsd(bundle.price));
 
   const [discountCode, setDiscountCode] = React.useState("");
   const [paymentModal, setPaymentModal] = React.useState<null | "crypto" | "stripe">(null);
@@ -218,7 +260,7 @@ export function CheckoutScreen({ bundleId }: { bundleId?: string }) {
                         Pay by crypto wallet address
                       </div>
                       <div className="mt-1 text-[11px] text-zinc-600">
-                        Send {formatUsd(price)} to our wallet ({cryptoNetworkLabel})
+                        Send {formatUsd(payAmountUsd)} to our wallet ({cryptoNetworkLabel})
                       </div>
                     </div>
                     <div className="text-[14px] font-extrabold text-zinc-400">
@@ -250,17 +292,17 @@ export function CheckoutScreen({ bundleId }: { bundleId?: string }) {
                   onClose={() => setPaymentModal(null)}
                   walletAddress={cryptoWalletAddress}
                   networkLabel={cryptoNetworkLabel}
-                  amountUsd={price}
-                  bundleLabel={bundle.label}
+                  amountUsd={payAmountUsd}
+                  bundleLabel={payLabel}
                 />
 
                 <StripeCheckoutModal
                   open={paymentModal === "stripe"}
                   onClose={() => setPaymentModal(null)}
-                  amountUsd={price}
+                  amountUsd={payAmountUsd}
                   amountCents={amountCents}
-                  bundleId={bundle.id}
-                  bundleLabel={bundle.label}
+                  bundleId={payId}
+                  bundleLabel={payLabel}
                 />
 
                 <div className="mt-4 rounded-md border border-zinc-200 bg-white p-4 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
@@ -322,22 +364,58 @@ export function CheckoutScreen({ bundleId }: { bundleId?: string }) {
             </div>
 
             <div className="bg-[#fafafa] px-6 py-6">
-              <div className="flex items-start gap-3">
-                <div className="grid h-12 w-14 place-items-center overflow-hidden rounded-md border border-zinc-200 bg-white">
-                  <Image src="/images/q1.png" alt="" width={52} height={28} />
+              {fromCart ? (
+                <div className="grid gap-3">
+                  {cartItems.length === 0 ? (
+                    <div className="text-[11px] text-zinc-600">Your cart is empty.</div>
+                  ) : (
+                    <div className="flex items-start gap-3">
+                      <div className="grid h-12 w-14 place-items-center overflow-hidden rounded-md border border-zinc-200 bg-white">
+                        <Image
+                          src={primaryCartItem?.imageSrc ?? "/images/q1.png"}
+                          alt=""
+                          width={52}
+                          height={28}
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-[11px] font-extrabold text-zinc-900">
+                          QFS GOLD BILL
+                        </div>
+                        <div className="mt-0.5 text-[10px] text-zinc-500">
+                          {payLabel} • Qty {primaryCartItem?.quantity ?? 1}
+                        </div>
+                        {cartItems.length > 1 ? (
+                          <div className="mt-1 text-[10px] text-zinc-500">
+                            + {cartItems.length - 1} more item
+                            {cartItems.length - 1 === 1 ? "" : "s"}
+                          </div>
+                        ) : null}
+                      </div>
+                      <div className="text-[11px] font-extrabold text-zinc-900">
+                        {formatUsd(payAmountUsd)}
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <div className="min-w-0 flex-1">
+              ) : (
+                <div className="flex items-start gap-3">
+                  <div className="grid h-12 w-14 place-items-center overflow-hidden rounded-md border border-zinc-200 bg-white">
+                    <Image src="/images/q1.png" alt="" width={52} height={28} />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[11px] font-extrabold text-zinc-900">
+                      QFS GOLD BILL
+                    </div>
+                    <div className="mt-0.5 text-[10px] text-zinc-500">
+                      {bundle.label}
+                    </div>
+                  </div>
                   <div className="text-[11px] font-extrabold text-zinc-900">
-                    QFS GOLD BILL
-                  </div>
-                  <div className="mt-0.5 text-[10px] text-zinc-500">
-                    {bundle.label}
+                    {bundle.price}
                   </div>
                 </div>
-                <div className="text-[11px] font-extrabold text-zinc-900">
-                  {bundle.price}
-                </div>
-              </div>
+              )}
 
               <div className="mt-4 flex items-center gap-2">
                 <input
@@ -358,7 +436,7 @@ export function CheckoutScreen({ bundleId }: { bundleId?: string }) {
                 <div className="flex items-center justify-between">
                   <div>Subtotal</div>
                   <div className="font-semibold text-zinc-900">
-                    {bundle.price}
+                    {fromCart ? formatUsd(payAmountUsd) : bundle.price}
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
@@ -378,22 +456,24 @@ export function CheckoutScreen({ bundleId }: { bundleId?: string }) {
                     USD
                   </div>
                   <div className="text-[18px] font-extrabold text-zinc-900">
-                    {formatUsd(price)}
+                    {formatUsd(payAmountUsd)}
                   </div>
                 </div>
               </div>
 
-              <div className="mt-2 flex items-center gap-2 text-[10px] font-semibold text-zinc-600">
-                <div className="grid h-4 w-4 place-items-center rounded-full bg-zinc-200 text-[10px] text-zinc-700">
-                  i
+              {!fromCart ? (
+                <div className="mt-2 flex items-center gap-2 text-[10px] font-semibold text-zinc-600">
+                  <div className="grid h-4 w-4 place-items-center rounded-full bg-zinc-200 text-[10px] text-zinc-700">
+                    i
+                  </div>
+                  <div className="text-zinc-600">
+                    TOTAL SAVINGS{" "}
+                    <span className="font-extrabold text-zinc-900">
+                      {formatUsd(savings)}
+                    </span>
+                  </div>
                 </div>
-                <div className="text-zinc-600">
-                  TOTAL SAVINGS{" "}
-                  <span className="font-extrabold text-zinc-900">
-                    {formatUsd(savings)}
-                  </span>
-                </div>
-              </div>
+              ) : null}
 
               <div className="mt-4 flex items-center justify-center gap-2 rounded-md border border-zinc-200 bg-white px-3 py-2 text-[10px] font-extrabold text-zinc-700">
                 <div className="grid h-4 w-4 place-items-center rounded bg-[#2bb34a] text-[10px] font-extrabold text-white">
