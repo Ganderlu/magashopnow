@@ -127,6 +127,11 @@ export function ProductOfferSection() {
   const [activeThumb, setActiveThumb] = React.useState<"front" | "back">(
     "front",
   );
+  const carouselImages = React.useMemo(
+    () => ["/images/q1.webp", "/images/q1.png", "/images/q13.png"],
+    [],
+  );
+  const [carouselIndex, setCarouselIndex] = React.useState(0);
 
   React.useEffect(() => {
     const unsub = listenPromoData((data) => setEndsAtMs(data.endsAtMs));
@@ -144,26 +149,73 @@ export function ProductOfferSection() {
     <section className="w-full bg-white">
       <div className="mx-auto flex max-w-[1240px] flex-col gap-10 px-4 py-12 sm:px-6 lg:flex-row lg:items-start lg:gap-14">
         <div className="flex w-full flex-col gap-4 lg:w-[58%]">
-          <div className="flex items-start gap-5">
+          <div className="sm:hidden">
+            <div className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-[0_12px_34px_rgba(0,0,0,0.12)]">
+              <div className="relative aspect-[16/10] w-full bg-white">
+                <Image
+                  src={carouselImages[carouselIndex] ?? "/images/q1.webp"}
+                  alt="QFS Gold Bill"
+                  fill
+                  className="object-contain"
+                  sizes="100vw"
+                  priority
+                />
+                <div className="absolute right-3 top-3 grid h-12 w-12 place-items-center rounded-full border border-zinc-200 bg-white shadow-[0_8px_22px_rgba(0,0,0,0.10)]">
+                  <Image src="/gold-seal.svg" alt="Trusted" width={32} height={32} />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                aria-label="Previous image"
+                className="absolute left-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-black/55 text-white shadow-[0_10px_25px_rgba(0,0,0,0.25)]"
+                onClick={() =>
+                  setCarouselIndex((i) =>
+                    (i - 1 + carouselImages.length) % carouselImages.length,
+                  )
+                }
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                aria-label="Next image"
+                className="absolute right-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-black/55 text-white shadow-[0_10px_25px_rgba(0,0,0,0.25)]"
+                onClick={() =>
+                  setCarouselIndex((i) => (i + 1) % carouselImages.length)
+                }
+              >
+                ›
+              </button>
+            </div>
+
+            <div className="mt-3 flex items-center justify-center gap-2">
+              {carouselImages.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  aria-label={`Go to image ${idx + 1}`}
+                  onClick={() => setCarouselIndex(idx)}
+                  className={[
+                    "h-2.5 w-2.5 rounded-full",
+                    idx === carouselIndex ? "bg-zinc-900" : "bg-zinc-300",
+                  ].join(" ")}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="hidden items-start gap-5 sm:flex">
             <div className="flex flex-1 flex-col gap-4">
               <div className="grid gap-4">
                 <div className="overflow-hidden rounded border border-zinc-200 bg-white shadow-[0_8px_26px_rgba(0,0,0,0.08)]">
                   <Image
-                    src="/images/q1.png"
+                    src={activeThumb === "front" ? "/images/q1.webp" : "/images/q1.png"}
                     alt="QFS Gold Bill"
                     width={900}
                     height={450}
                     className="h-auto w-full"
                     priority
-                  />
-                </div>
-                <div className="overflow-hidden rounded border border-zinc-200 bg-white shadow-[0_8px_26px_rgba(0,0,0,0.08)]">
-                  <Image
-                    src="/images/q1.png"
-                    alt="QFS Gold Bill back"
-                    width={900}
-                    height={450}
-                    className="h-auto w-full"
                   />
                 </div>
               </div>
@@ -181,7 +233,7 @@ export function ProductOfferSection() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 pt-3">
+          <div className="hidden items-center gap-3 pt-3 sm:flex">
             <button
               type="button"
               onClick={() => setActiveThumb("front")}
@@ -192,7 +244,7 @@ export function ProductOfferSection() {
               aria-label="Front image"
             >
               <Image
-                src="/images/q1.png"
+                src="/images/q1.webp"
                 alt="Front thumb"
                 width={90}
                 height={56}
@@ -218,9 +270,10 @@ export function ProductOfferSection() {
               type="button"
               className="overflow-hidden rounded border border-zinc-200 bg-white shadow-[0_10px_22px_rgba(0,0,0,0.12)]"
               aria-label="Extra image"
+              onClick={() => setActiveThumb("front")}
             >
               <Image
-                src="/images/q1.png"
+                src="/images/q13.png"
                 alt="Mini thumb"
                 width={90}
                 height={56}
@@ -289,7 +342,7 @@ export function ProductOfferSection() {
                   >
                     <div className="grid h-7 w-10 place-items-center overflow-hidden rounded border border-zinc-200 bg-white">
                       <Image
-                        src="/images/q1.png"
+                        src="/images/q1.webp"
                         alt=""
                         width={34}
                         height={18}

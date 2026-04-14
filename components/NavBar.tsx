@@ -40,7 +40,58 @@ export function NavBar() {
 
   return (
     <header className="w-full bg-white">
-      <div className="mx-auto flex h-[76px] max-w-[1240px] items-center justify-between px-4 sm:px-6">
+      <div className="mx-auto flex h-[76px] max-w-[1240px] items-center justify-between px-4 sm:px-6 md:hidden">
+        <button
+          type="button"
+          className="grid h-10 w-10 place-items-center rounded-full p-2 text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
+          aria-label="Open menu"
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen(true)}
+        >
+          <div className="flex w-5 flex-col gap-1.5">
+            <div className="h-0.5 w-full rounded bg-current" />
+            <div className="h-0.5 w-full rounded bg-current" />
+            <div className="h-0.5 w-full rounded bg-current" />
+          </div>
+        </button>
+
+        <Link href="/" className="flex items-center justify-center">
+          <Image
+            src="/our-maga-shop.svg"
+            alt="Our Maga Shop"
+            width={112}
+            height={58}
+            priority
+          />
+        </Link>
+
+        <div className="flex items-center gap-2 text-zinc-700">
+          <button
+            type="button"
+            className="rounded-full p-2 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
+            aria-label="Search"
+            onClick={() => setSearchOpen(true)}
+          >
+            <SearchIcon className="h-5 w-5" />
+          </button>
+          <Link
+            href="/cart"
+            className="rounded-full p-2 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
+            aria-label="Cart"
+          >
+            <span className="relative inline-flex">
+              <BagIcon className="h-5 w-5" />
+              {count > 0 ? (
+                <span className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-[#6c0d0d] px-1 text-[11px] font-extrabold text-white">
+                  {count}
+                </span>
+              ) : null}
+            </span>
+          </Link>
+        </div>
+      </div>
+
+      <div className="mx-auto hidden h-[76px] max-w-[1240px] items-center justify-between px-4 sm:px-6 md:flex">
         <div className="flex items-center gap-10">
           <Link href="/" className="flex items-center gap-2">
             <Image
@@ -75,20 +126,6 @@ export function NavBar() {
         </div>
 
         <div className="flex items-center gap-2 text-zinc-600 sm:gap-4">
-          <button
-            type="button"
-            className="grid h-10 w-10 place-items-center rounded-full p-2 transition-colors hover:bg-zinc-100 hover:text-zinc-900 md:hidden"
-            aria-label="Open menu"
-            aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen(true)}
-          >
-            <div className="flex w-5 flex-col gap-1.5">
-              <div className="h-0.5 w-full rounded bg-current" />
-              <div className="h-0.5 w-full rounded bg-current" />
-              <div className="h-0.5 w-full rounded bg-current" />
-            </div>
-          </button>
-
           <button
             type="button"
             className="rounded-full p-2 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
@@ -154,6 +191,21 @@ export function NavBar() {
             </div>
 
             <div className="mx-auto max-w-[1240px] px-4 pb-10 pt-6 sm:px-6">
+              <button
+                type="button"
+                className="mb-3 flex w-full items-center justify-between rounded-lg border border-zinc-200 bg-white px-4 py-4 text-left text-[16px] font-semibold text-zinc-800"
+                onClick={() => {
+                  setMobileOpen(false);
+                  setAuthOpen(true);
+                }}
+              >
+                <span className="flex items-center gap-3">
+                  <UserIcon className="h-5 w-5 text-zinc-600" />
+                  Sign in
+                </span>
+                <span className="text-zinc-400">→</span>
+              </button>
+
               <div className="flex flex-col gap-2">
                 {navItems.map((item) => {
                   const isActive = pathname === item.href;
